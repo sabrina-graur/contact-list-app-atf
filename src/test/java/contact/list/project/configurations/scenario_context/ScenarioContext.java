@@ -5,10 +5,10 @@ import java.util.Map;
 
 public class ScenarioContext {
     private static ScenarioContext instance;
-    private Map<String, Object> scenarioContext;
+    private Map<Object, Object> data;
 
     private ScenarioContext() {
-        scenarioContext = new HashMap<>();
+        data = new HashMap<>();
     }
 
     public static ScenarioContext getInstance() {
@@ -18,11 +18,11 @@ public class ScenarioContext {
         return instance;
     }
 
-    public void setContext(Context key, Object value) {
-        scenarioContext.put(key.toString(), value);
+    public void saveData(Object key, Object value) {
+        data.put(key, value);
     }
 
-    public Object getContext() {
-        return scenarioContext;
+    public Object getData(Object key) {
+        return data.get(key);
     }
 }

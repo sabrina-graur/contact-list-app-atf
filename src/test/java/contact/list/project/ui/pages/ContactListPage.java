@@ -11,13 +11,12 @@ import org.openqa.selenium.WebElement;
 public class ContactListPage extends CommonPage {
 
     private static final Logger LOG = LogManager.getLogger(ContactListPage.class);
-
     public static By addContactButton = By.id("add-contact");
     public static By logout = By.id("logout");
 
     public static void clickLogout() {
         try {
-            WaitUtils.isElementDisplayed(logout, PropertiesManager.checkElementIsDisplayedTimeout());
+            WaitUtils.isDisplayed(logout, PropertiesManager.checkElementIsDisplayedTimeout());
             WebElement logoutButton = DriverManager.getDriver().findElement(logout);
             logoutButton.click();
             LOG.info("The Logout button was clicked");

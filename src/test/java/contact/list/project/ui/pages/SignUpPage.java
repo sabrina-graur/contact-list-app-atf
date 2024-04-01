@@ -10,8 +10,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.time.Duration;
-
 public class SignUpPage extends CommonPage {
     private static final Logger LOG = LogManager.getLogger(SignUpPage.class);
     public static By firstNameInput = By.xpath("//input[@id='firstName']");
@@ -33,7 +31,7 @@ public class SignUpPage extends CommonPage {
 
     public static void clickCancel() {
         try {
-            WaitUtils.isElementDisplayed(cancel, PropertiesManager.checkElementIsDisplayedTimeout());
+            WaitUtils.isDisplayed(cancel, PropertiesManager.checkElementIsDisplayedTimeout());
             WebElement cancelButton = DriverManager.getDriver().findElement(cancel);
             cancelButton.click();
             LOG.info("The Cancel button was clicked");

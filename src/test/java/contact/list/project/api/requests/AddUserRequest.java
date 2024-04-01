@@ -1,5 +1,4 @@
-package contact.list.project.api.dtos.requests;
-
+package contact.list.project.api.requests;
 
 import io.cucumber.core.internal.com.fasterxml.jackson.annotation.JsonGetter;
 
@@ -16,39 +15,23 @@ public class AddUserRequest {
         this.password = password;
     }
 
-    public AddUserRequest() {
+    @JsonGetter("firstName")
+    public String getFirstName() {
+        return firstName;
+    }
+
+    @JsonGetter("lastName")
+    public String getLastName() {
+        return lastName;
     }
 
     @JsonGetter("email")
-    public String getJsonEmail() {
-        if (email != null) {
-            return email;
-        }
-        return "";
-    }
-
     public String getEmail() {
         return email;
     }
 
     @JsonGetter("password")
-    public String getJsonPassword() {
-        if (password != null) {
-            return password;
-        }
-        return "";
-    }
-
     public String getPassword() {
         return password;
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }

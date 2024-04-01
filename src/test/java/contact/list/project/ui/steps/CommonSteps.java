@@ -2,7 +2,6 @@ package contact.list.project.ui.steps;
 
 import contact.list.project.configurations.properties.PropertiesManager;
 import contact.list.project.configurations.driverfactory.DriverManager;
-import contact.list.project.ui.pages.ContactListPage;
 import contact.list.project.ui.pages.SignUpPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -32,13 +31,7 @@ public class CommonSteps {
         Thread.sleep(5000);
     }
 
-    @When("user clicks logout button")
-    public void clicksButton() {
-        ContactListPage.clickLogout();
-    }
-
     public static void populateField(By inputField, String value) {
         DriverManager.getDriver().findElement(inputField).sendKeys(value);
     }
 }
-

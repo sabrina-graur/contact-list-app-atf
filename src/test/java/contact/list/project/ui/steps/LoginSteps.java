@@ -9,8 +9,8 @@ import org.junit.Assert;
 public class LoginSteps {
 
     @When("^user logs in with (valid|invalid) credentials$")
-    public void userLogsInWithValidCredentials(String word) throws InterruptedException {
-            if (word.equals("valid")) {
+    public void login (String validity) throws InterruptedException {
+            if (validity.equals("valid")) {
                 LoginPage.loginWithValidCredentials();
             } else {
                 LoginPage.loginWithInvalidCredentials();
