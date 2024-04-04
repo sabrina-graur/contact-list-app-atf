@@ -1,8 +1,6 @@
 package contact.list.project.configurations.driverfactory;
 
 import contact.list.project.configurations.properties.PropertiesManager;
-import contact.list.project.configurations.scenario_context.Context;
-import contact.list.project.configurations.scenario_context.ScenarioContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +9,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverManager {
-    static ScenarioContext scenarioContext = ScenarioContext.getInstance();
     private static final Logger LOG = LogManager.getLogger(DriverManager.class);
     private static WebDriver driver;
 
@@ -37,7 +34,6 @@ public class DriverManager {
                     default -> throw new IllegalArgumentException("Unsupported browser type: " + browserType);
                 }
                 driver.manage().window().maximize();
-                scenarioContext.setContext(Context.WEB_DRIVER, driver);
                 LOG.info("Initialized WebDriver: {}", browserType);
             }
 

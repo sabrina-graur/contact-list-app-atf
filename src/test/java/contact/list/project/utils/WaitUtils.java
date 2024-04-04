@@ -11,16 +11,15 @@ import java.time.Duration;
 
 public class WaitUtils {
 
-    public static boolean isElementDisplayed(By elementLocator, Duration timeoutInSeconds) {
+    public static void isDisplayed(By elementLocator, Duration timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), timeoutInSeconds);
         WebElement element = null;
         try {
             element = wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
-            return element.isDisplayed();
+            element.isDisplayed();
         } catch (Exception e) {
             assert element != null;
-            return !element.isDisplayed();
+            element.isDisplayed();
         }
     }
 }
-

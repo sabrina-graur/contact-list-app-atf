@@ -8,8 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.time.Duration;
-
 public class CommonPage {
 
     private static final Logger LOG = LogManager.getLogger(CommonPage.class);
@@ -21,7 +19,7 @@ public class CommonPage {
 
     public static void clickSubmit() {
         try {
-            WaitUtils.isElementDisplayed(submit, PropertiesManager.checkElementIsDisplayedTimeout());
+            WaitUtils.isDisplayed(submit, PropertiesManager.checkElementIsDisplayedTimeout());
             WebElement submitButton = DriverManager.getDriver().findElement(submit);
             submitButton.click();
             LOG.info("The Submit button was clicked");

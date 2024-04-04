@@ -10,12 +10,11 @@ import org.openqa.selenium.By;
 
 public class LoginPage extends CommonPage {
     private static final Logger LOG = LogManager.getLogger(LoginPage.class);
-    public static By signUpButton = By.xpath("//button[@id='signup']");
     public static By errorLabel = By.id("error");
 
     public static void loginWithValidCredentials() {
         try {
-            WaitUtils.isElementDisplayed(emailInput, PropertiesManager.checkElementIsDisplayedTimeout());
+            WaitUtils.isDisplayed(emailInput, PropertiesManager.checkElementIsDisplayedTimeout());
             CommonSteps.populateField(emailInput, PropertiesManager.getUsername());
             LOG.info("Email field is populated");
             CommonSteps.populateField(passwordInput, PropertiesManager.getPassword());
@@ -30,7 +29,7 @@ public class LoginPage extends CommonPage {
 
     public static void loginWithInvalidCredentials() {
         try {
-            WaitUtils.isElementDisplayed(emailInput, PropertiesManager.checkElementIsDisplayedTimeout());
+            WaitUtils.isDisplayed(emailInput, PropertiesManager.checkElementIsDisplayedTimeout());
             CommonSteps.populateField(emailInput, DataGenerator.generateRandomAlphabeticValue(1));
             LOG.info("Email field is populated");
             CommonSteps.populateField(passwordInput, PropertiesManager.getPassword());

@@ -23,7 +23,6 @@ public class PropertiesManager {
         } catch (IOException e) {
             LOG.error("Error loading properties file", e);
         }
-
     }
 
     private PropertiesManager() {
@@ -37,6 +36,11 @@ public class PropertiesManager {
     public static String getPassword() {
         LOG.info("Getting password type from properties");
         return PROPERTIES.getProperty("password");
+    }
+
+    public static String getBaseUrl() {
+        LOG.info("Getting Base URL from properties");
+        return PROPERTIES.getProperty("baseUrl");
     }
 
     public static String getPage(String pageName) {
