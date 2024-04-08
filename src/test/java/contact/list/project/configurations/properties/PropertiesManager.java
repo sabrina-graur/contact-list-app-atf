@@ -2,7 +2,6 @@ package contact.list.project.configurations.properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
@@ -14,7 +13,6 @@ public class PropertiesManager {
 
     static {
         try (InputStream input = PropertiesManager.class.getClassLoader().getResourceAsStream("properties/config.properties")) {
-
             if (input != null) {
                 PROPERTIES.load(input);
             } else {
@@ -29,23 +27,20 @@ public class PropertiesManager {
     }
 
     public static String getUsername() {
-        LOG.info("Getting email from properties");
         return PROPERTIES.getProperty("email");
     }
 
     public static String getPassword() {
-        LOG.info("Getting password type from properties");
         return PROPERTIES.getProperty("password");
     }
 
     public static String getBaseUrl() {
-        LOG.info("Getting Base URL from properties");
         return PROPERTIES.getProperty("baseUrl");
     }
 
     public static String getPage(String pageName) {
         LOG.info("Getting URL from properties");
-        return PROPERTIES.getProperty("baseUrl") + PROPERTIES.getProperty(pageName);
+        return PROPERTIES.getProperty("baseUrl") + PROPERTIES.getProperty(pageName);//TODO: add String variable in LOG.debug ???
     }
 
     public static String getBrowser() {
@@ -57,7 +52,6 @@ public class PropertiesManager {
     }
 
     public static String getDriverPath(String driverName) {
-        LOG.info("Getting driver path for browser: {}", driverName);
         return switch (driverName) {
             case "chrome" -> PROPERTIES.getProperty("chromeDriverPath");
             case "firefox" -> PROPERTIES.getProperty("firefoxDriverPath");

@@ -4,12 +4,13 @@ Feature: RegisterUser
   Scenario: User successfully creates an account
     Given user performs registration with the valid data:
       | firstName | lastName | email                        | password |
-      | Selina    | Kyle     | selina.tryformore8@gmail.com | meowMeow |
+      | Selina    | Kyle     | selina.tryformo45@gmail.com | meowMeow |
 #      | Selina    | Kyle     | selina.kyle@gmail.com | meowMeow |
     And response has status code 201
     When user validates the newly created account
     Then response has status code 200
 
+  @Negative
   Scenario Outline: Validate registration with invalid data
     When user performs registration with the invalid data:
       | firstName   | lastName   | email   | password   |
