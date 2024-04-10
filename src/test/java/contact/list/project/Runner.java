@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
                 "pretty",
                 "html:target/evidence/reports/cucumber-report/cucumber-report-html"
         },
-        tags = "@API or @UI",
+        tags = "@UI or @API or @Negative",
         features = {"src/test/resources/features"},
         glue = {"contact.list.project"}
 )

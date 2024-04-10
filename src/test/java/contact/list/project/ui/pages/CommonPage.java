@@ -9,23 +9,29 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class CommonPage {
-
     private static final Logger LOG = LogManager.getLogger(CommonPage.class);
 
-    private By pageTitle = By.xpath("//body//h1[1]");
-    public static By submit = By.id("submit");
+    public static By submitButton = By.id("submit");
     public static By emailInput = By.xpath("//input[@id='email']");
     public static By passwordInput = By.xpath("//input[@id='password']");
 
-    public static void clickSubmit() {
+    public static void clickButton(By button) {
         try {
-            WaitUtils.isDisplayed(submit, PropertiesManager.checkElementIsDisplayedTimeout());
-            WebElement submitButton = DriverManager.getDriver().findElement(submit);
-            submitButton.click();
-            LOG.info("The Submit button was clicked");
+            WaitUtils.isClickable(button, PropertiesManager.checkElementIsDisplayedTimeout());
+            WebElement element = DriverManager.getDriver().findElement(button);
+            element.click();
+            LOG.info("The {} button was clicked", button);
         } catch (Exception e) {
-            LOG.error("Error clicking the Submit button", e);
-            throw new RuntimeException("Error clicking the Submit button", e);
+            LOG.error("Error clicking the {} button", button, e);
+            throw new RuntimeException("Error clicking the " + button + " button", e);
         }
+    }
+
+    public static void clickSubmit() {
+        clickButton(submitButton);
+    }
+
+    public static void populateField(By inputField, String value) {
+        DriverManager.getDriver().findElement(inputField).sendKeys(value);
     }
 }

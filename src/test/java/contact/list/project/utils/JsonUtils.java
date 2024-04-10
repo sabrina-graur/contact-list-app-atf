@@ -7,13 +7,13 @@ import java.util.Map;
 public class JsonUtils {
 
     public static String convertToJson(String body) {
-        body = body.replaceAll("\\[|\\]", "");
-        String[] keyValuePairs = body.split(",");
-        Map<String, Object> jsonMap = new LinkedHashMap<>();
+        body = body.replaceAll("\\[|\\]", ""); //removes square brackets from the input string and replace it with an empty string
+        String[] keyValuePairs = body.split(","); //modified string into an array of key-value pairs based on commas.
+        Map<String, Object> jsonMap = new LinkedHashMap<>(); //LinkedHashMap order of insertions
 
         for (String pair : keyValuePairs) {
-            String[] keyValue = pair.split(":");
-            String key = keyValue[0].trim();
+            String[] keyValue = pair.split(":"); //splits each key-value pair into two parts,based on the colon : separator.
+            String key = keyValue[0].trim(); //удаляются начальные и конечные пробелы
             String value = keyValue[1].trim();
 
             try {
@@ -24,9 +24,9 @@ public class JsonUtils {
             }
         }
 
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return objectMapper.writeValueAsString(jsonMap);
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(jsonMap); //is part of the Jackson library. To convert Java objects to JSON and vice versa.
         } catch (Exception e) {
             e.printStackTrace();
             return null;
