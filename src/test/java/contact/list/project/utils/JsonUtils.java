@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class JsonUtils {
 
-    public static String convertToJson(String body) {
+    public static String convertToJson(String body) { //TODO: remove this, use only rest assured. Object response
         body = body.replaceAll("\\[|\\]", ""); //removes square brackets from the input string and replace it with an empty string
         String[] keyValuePairs = body.split(","); //modified string into an array of key-value pairs based on commas.
         Map<String, Object> jsonMap = new LinkedHashMap<>(); //LinkedHashMap order of insertions

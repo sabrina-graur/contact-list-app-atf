@@ -1,8 +1,26 @@
 package contact.list.project.ui.pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class ContactListPage extends CommonPage {
-    public static By pageTitleContactList = By.xpath("//h1[text() ='Contact List']");
-    public static By logoutButton = By.id("logout");
+
+    @FindBy(id = "logout")
+    private WebElement logoutButton;
+
+    @FindBy(xpath = "//h1[text() ='Contact List']")
+    private WebElement pageContactListTitle;
+
+    public ContactListPage(WebDriver driver) {
+        super(driver);
+    }
+
+    public WebElement getPageContactListTitle() {
+        return pageContactListTitle;
+    }
+
+    public void clickLogoutButton(){
+        actions.clickButton(logoutButton);
+    }
 }

@@ -1,28 +1,29 @@
 package contact.list.project.ui.steps;
 
-import contact.list.project.configurations.properties.PropertiesManager;
-import contact.list.project.ui.pages.CommonPage;
-import contact.list.project.ui.pages.ContactListPage;
+import contact.list.project.configurations.scenario_context.ScenarioContext;
+import contact.list.project.configurations.scenario_context.ScenarioKey;
 import contact.list.project.ui.pages.LoginPage;
 import contact.list.project.ui.pages.SignUpPage;
-import contact.list.project.utils.WaitUtils;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
 
 public class SignUpSteps {
+    WebDriver driver = ScenarioContext.getInstance().getData(ScenarioKey.WEB_DRIVER);
+    SignUpPage signUpPage = new SignUpPage(driver);
+    LoginPage loginPage = new LoginPage(driver);
 
     @When("user performs registration with valid data")
     public void registerUser() {
-        SignUpPage.addUser();
-        WaitUtils.isDisplayed(ContactListPage.pageTitleContactList, PropertiesManager.checkElementIsDisplayedTimeout()); //TODO: ask Tudor about this soultion
+        signUpPage.addUser();
     }
 
     @When("user clicks sign up button")
     public void clickSignUpButton() {
-        CommonPage.clickButton(LoginPage.signUpButton);
+        loginPage.clickSignUpButton();
     }
 
     @When("user cancels the registration")
-    public void clickCancel() {
-        CommonPage.clickButton(SignUpPage.cancelButton);
+    public void cancel() {
+        signUpPage.clickCancel();
     }
 }

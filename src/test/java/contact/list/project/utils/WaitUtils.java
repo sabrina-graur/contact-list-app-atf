@@ -1,33 +1,30 @@
 package contact.list.project.utils;
 
-import org.openqa.selenium.By;
+import contact.list.project.configurations.scenario_context.ScenarioContext;
+import contact.list.project.configurations.scenario_context.ScenarioKey;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import contact.list.project.configurations.driverfactory.DriverManager;
+
 import java.time.Duration;
 
 public class WaitUtils {
 
-    public static void isDisplayed(By elementLocator, Duration timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), timeoutInSeconds);
-        WebElement element = null;
+    public static void waitForElementToBeDisplayed(WebElement elementLocator, Duration timeoutInSeconds) {
         try {
-            element = wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
-            element.isDisplayed();
+            WebDriverWait wait = new WebDriverWait(ScenarioContext.getInstance().getData(ScenarioKey.WEB_DRIVER), timeoutInSeconds);
+            wait.until(ExpectedConditions.visibilityOf(elementLocator));
         } catch (Exception e) {
-            assert element != null;
-            element.isDisplayed();
+            throw new RuntimeException("Failed to wait for element to be displayed.", e);
         }
     }
 
-    public static boolean isClickable(By element, Duration timeoutInSeconds) {
+    public static void waitForElementToBeClickable(WebElement element, Duration timeoutInSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), timeoutInSeconds);
+            WebDriverWait wait = new WebDriverWait(ScenarioContext.getInstance().getData(ScenarioKey.WEB_DRIVER), timeoutInSeconds);
             wait.until(ExpectedConditions.elementToBeClickable(element));
-            return true;
         } catch (Exception e) {
-            return false;
+            throw new IllegalArgumentException("An error occurred: " + e.getMessage(), e);
         }
     }
 }
