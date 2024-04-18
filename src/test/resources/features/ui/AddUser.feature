@@ -8,9 +8,9 @@ Feature: AddUser
     When user cancels the registration
     Then user is taken to the "loginPage"
 
-  Scenario: Add user
+  Scenario: User successfully add an account
     Given user is on "signUpPage"
     When user performs registration with valid data
-    Then user is taken to the "contactListPage"
+    Then "Contact List" page is displayed
     When user clicks logout button
     Then user is taken to the "loginPage"

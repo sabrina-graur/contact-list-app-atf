@@ -2,17 +2,18 @@ package contact.list.project.configurations.properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
 import java.util.Properties;
 
 public class PropertiesManager {
-    private static final Logger LOG = LogManager.getLogger(PropertiesManager.class);
+    private static final Logger LOG = LogManager.getLogger(PropertiesManager.class); //рефлексия, мол логер ссылает на этот класс внутри класса
     private static final Properties PROPERTIES = new Properties();
 
     static {
-        try (InputStream input = PropertiesManager.class.getClassLoader().getResourceAsStream("properties/config.properties")) {
+        try (InputStream input = PropertiesManager.class.getClassLoader().getResourceAsStream("properties/config.properties")) {//try with resources, to not wrote finally, to close here
             if (input != null) {
                 PROPERTIES.load(input);
             } else {
@@ -24,23 +25,16 @@ public class PropertiesManager {
     }
 
     private PropertiesManager() {
-    }
-
-    public static String getUsername() {
-        return PROPERTIES.getProperty("email");
-    }
-
-    public static String getPassword() {
-        return PROPERTIES.getProperty("password");
-    }
+    } //чтобы невозможно было создать объект класса
 
     public static String getBaseUrl() {
         return PROPERTIES.getProperty("baseUrl");
     }
 
     public static String getPage(String pageName) {
-        LOG.info("Getting URL from properties");
-        return PROPERTIES.getProperty("baseUrl") + PROPERTIES.getProperty(pageName);//TODO: add String variable in LOG.debug ???
+        String pageUrl = getBaseUrl() + PROPERTIES.getProperty(pageName);
+        LOG.info("The page URL is retrieved from the properties: " + pageUrl);
+        return pageUrl;
     }
 
     public static String getBrowser() {
@@ -49,17 +43,5 @@ public class PropertiesManager {
 
     public static Duration checkElementIsDisplayedTimeout() {
         return Duration.ofSeconds(Integer.parseInt(PROPERTIES.getProperty("elementIsDisplayed")));
-    }
-
-    public static String getDriverPath(String driverName) {
-        return switch (driverName) {
-            case "chrome" -> PROPERTIES.getProperty("chromeDriverPath");
-            case "firefox" -> PROPERTIES.getProperty("firefoxDriverPath");
-            case "edge" -> PROPERTIES.getProperty("edgeDriverPath");
-            default -> {
-                LOG.error("Unsupported browser type: {}", driverName);
-                throw new IllegalArgumentException("Unsupported browser type");
-            }
-        };
     }
 }

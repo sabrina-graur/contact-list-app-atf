@@ -1,37 +1,49 @@
 package contact.list.project.ui.pages;
 
-import contact.list.project.configurations.driverfactory.DriverManager;
-import contact.list.project.configurations.properties.PropertiesManager;
-import contact.list.project.utils.WaitUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
+import contact.list.project.configurations.scenario_context.ScenarioContext;
+import contact.list.project.configurations.scenario_context.ScenarioKey;
+import contact.list.project.ui.browser.Actions;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class CommonPage {
-    private static final Logger LOG = LogManager.getLogger(CommonPage.class);
 
-    public static By submitButton = By.id("submit");
-    public static By emailInput = By.xpath("//input[@id='email']");
-    public static By passwordInput = By.xpath("//input[@id='password']");
+    Actions actions = new Actions(ScenarioContext.getInstance().getData(ScenarioKey.WEB_DRIVER));
+    protected WebDriver driver;
 
-    public static void clickButton(By button) {
-        try {
-            WaitUtils.isClickable(button, PropertiesManager.checkElementIsDisplayedTimeout());
-            WebElement element = DriverManager.getDriver().findElement(button);
-            element.click();
-            LOG.info("The {} button was clicked", button);
-        } catch (Exception e) {
-            LOG.error("Error clicking the {} button", button, e);
-            throw new RuntimeException("Error clicking the " + button + " button", e);
-        }
+    @FindBy(xpath = "//input[@id='email']")
+    private WebElement emailInput;
+
+    @FindBy(xpath = "//input[@id='password']")
+    private WebElement passwordInput;
+
+    @FindBy(id = "submit")
+    private WebElement submitButton;
+
+    public CommonPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    public static void clickSubmit() {
-        clickButton(submitButton);
+    public WebElement getEmailInput() {
+        return emailInput;
     }
 
-    public static void populateField(By inputField, String value) {
-        DriverManager.getDriver().findElement(inputField).sendKeys(value);
+    public WebElement getPasswordInput() {
+        return passwordInput;
     }
+
+    public void clickSubmit() {
+        actions.clickButton(submitButton);
+    }
+
+//    public By getPageElementByName(String elementName) {
+//        return switch (elementName) {
+//            case "Logout Button" -> ContactListPage.logoutButton;
+//            case "Contact List Page Title" -> ContactListPage.pageContactListTitle;
+//            default -> throw new IllegalArgumentException("Unknown element name: " + elementName);
+//        };
+//    }
 }
