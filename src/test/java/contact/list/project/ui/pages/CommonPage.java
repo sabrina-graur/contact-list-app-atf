@@ -1,49 +1,54 @@
 package contact.list.project.ui.pages;
 
-import contact.list.project.configurations.scenario_context.ScenarioContext;
-import contact.list.project.configurations.scenario_context.ScenarioKey;
-import contact.list.project.ui.browser.Actions;
-import org.openqa.selenium.WebDriver;
+import contact.list.project.configurations.driverfactory.DriverManager;
+import contact.list.project.configurations.properties.PropertiesManager;
+import contact.list.project.ui.browser.BrowserActions;
+import org.apache.logging.log4j.LogManager;
+import org.awaitility.Awaitility;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CommonPage {
+import static org.junit.Assert.assertEquals;
 
-    Actions actions = new Actions(ScenarioContext.getInstance().getData(ScenarioKey.WEB_DRIVER));
-    protected WebDriver driver;
+public abstract class CommonPage {
 
-    @FindBy(xpath = "//input[@id='email']")
-    private WebElement emailInput;
-
-    @FindBy(xpath = "//input[@id='password']")
-    private WebElement passwordInput;
+    BrowserActions actions = new BrowserActions();
+    private static final String TITLE_LOCATOR = "//h1[text()='%s']";
 
     @FindBy(id = "submit")
     private WebElement submitButton;
 
-    public CommonPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+    @FindBy(xpath = "//h1")
+    private WebElement commonTitle;
 
-    public WebElement getEmailInput() {
-        return emailInput;
-    }
-
-    public WebElement getPasswordInput() {
-        return passwordInput;
+    public CommonPage() {
+        PageFactory.initElements(DriverManager.getDriver(), this);
     }
 
     public void clickSubmit() {
         actions.clickButton(submitButton);
     }
 
-//    public By getPageElementByName(String elementName) {
-//        return switch (elementName) {
-//            case "Logout Button" -> ContactListPage.logoutButton;
-//            case "Contact List Page Title" -> ContactListPage.pageContactListTitle;
-//            default -> throw new IllegalArgumentException("Unknown element name: " + elementName);
-//        };
-//    }
+    public WebElement getPageTitle(String title) {
+        try {
+            return DriverManager.getDriver().findElement(By.xpath(String.format(TITLE_LOCATOR, title)));
+        } catch (NoSuchElementException e) {
+            LogManager.getLogger().warn("No title with the following text: {}", title);
+        }
+        return commonTitle;
+    }
+
+    public void assertPageTitle(String expectedTitle) {
+        WebElement pageTitleElement = getPageTitle(expectedTitle);
+        String actualTitle = pageTitleElement.getText();
+        Awaitility.await()
+                .atMost(PropertiesManager.checkElementIsDisplayedTimeout())
+                .untilAsserted(() -> {
+                    assertEquals("Page title does not match", expectedTitle, actualTitle);
+                });
+        LogManager.getLogger().info("The title with the following text: \"{}\" is displayed", expectedTitle);
+    }
 }

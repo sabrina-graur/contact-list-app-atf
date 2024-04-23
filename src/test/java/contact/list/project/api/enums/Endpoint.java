@@ -1,5 +1,7 @@
 package contact.list.project.api.enums;
 
+import org.apache.logging.log4j.LogManager;
+
 public enum Endpoint {
     SIGN_UP("users"),
     USER_INFO("users/me");
@@ -11,6 +13,7 @@ public enum Endpoint {
     }
 
     public String getEndPoint() {
+        LogManager.getLogger().info("Retrieving the endpoint: {}", ENDPOINT);
         return ENDPOINT;
     }
 }

@@ -1,7 +1,6 @@
 package contact.list.project.ui.pages;
 
 import contact.list.project.utils.DataGenerator;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -16,15 +15,17 @@ public class SignUpPage extends CommonPage {
     @FindBy(xpath = "//input[@id='lastName']")
     private WebElement lastNameInput;
 
-    public SignUpPage(WebDriver driver) {
-        super(driver);
-    }
+    @FindBy(xpath = "//input[@id='email']")
+    private WebElement emailInput;
+
+    @FindBy(xpath = "//input[@id='password']")
+    private WebElement passwordInput;
 
     public void addUser() {
-        actions.populateField(firstNameInput, DataGenerator.generateRandomAlphabeticValue(4));
-        actions.populateField(lastNameInput, DataGenerator.generateRandomAlphabeticValue(5));
-        actions.populateField(getEmailInput(), DataGenerator.generateRandomEmail(20));
-        actions.populateField(getPasswordInput(), DataGenerator.generateRandomAlphanumericValue(8));
+        actions.populateField(firstNameInput, DataGenerator.generateRandomFirstName());
+        actions.populateField(lastNameInput, DataGenerator.generateRandomLastName());
+        actions.populateField(emailInput, DataGenerator.generateRandomEmail());
+        actions.populateField(passwordInput, DataGenerator.generateRandomPassword());
         clickSubmit();
     }
 

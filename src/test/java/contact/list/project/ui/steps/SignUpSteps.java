@@ -1,29 +1,32 @@
 package contact.list.project.ui.steps;
 
-import contact.list.project.configurations.scenario_context.ScenarioContext;
-import contact.list.project.configurations.scenario_context.ScenarioKey;
 import contact.list.project.ui.pages.LoginPage;
 import contact.list.project.ui.pages.SignUpPage;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
 
 public class SignUpSteps {
-    WebDriver driver = ScenarioContext.getInstance().getData(ScenarioKey.WEB_DRIVER);
-    SignUpPage signUpPage = new SignUpPage(driver);
-    LoginPage loginPage = new LoginPage(driver);
+    SignUpPage signUpPage = new SignUpPage();
+    LoginPage loginPage = new LoginPage();
 
-    @When("user performs registration with valid data")
-    public void registerUser() {
-        signUpPage.addUser();
+    @Given("user is on Sign Up page")
+    public void isOnSignUpPage() {
+        loginPage.clickSignUpButton();
     }
 
-    @When("user clicks sign up button")
-    public void clickSignUpButton() {
-        loginPage.clickSignUpButton();
+    @When("user performs registration")
+    public void registerUser() {
+        signUpPage.addUser();
     }
 
     @When("user cancels the registration")
     public void cancel() {
         signUpPage.clickCancel();
+    }
+
+    @Then("{string} page is displayed")
+    public void isPageDisplayed(String title) {
+        signUpPage.assertPageTitle(title);
     }
 }

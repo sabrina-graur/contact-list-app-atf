@@ -2,7 +2,7 @@
 Feature: Login
 
   Background:
-    Given user is on "loginPage"
+    Given user is on Login page
 
   Scenario: Check login with valid data
     When user logs in with the following credentials:
@@ -15,7 +15,7 @@ Feature: Login
     When user logs in with the following credentials:
       | email    | <email>    |
       | password | <password> |
-    Then "Incorrect username or password" error message is displayed
+    Then "Incorrect username or password" message is displayed
     Examples:
       | email                    | password        |
       | r                        | testrinaaacount |
