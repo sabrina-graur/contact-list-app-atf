@@ -1,28 +1,38 @@
 package contact.list.project.ui.steps;
 
-import contact.list.project.configurations.properties.PropertiesManager;
-import contact.list.project.configurations.scenario_context.ScenarioContext;
-import contact.list.project.configurations.scenario_context.ScenarioKey;
 import contact.list.project.ui.pages.LoginPage;
-import contact.list.project.utils.WaitUtils;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.Map;
 
-public class LoginSteps {
-    LoginPage loginPage = new LoginPage(ScenarioContext.getInstance().getData(ScenarioKey.WEB_DRIVER));
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
-    @When("user logs in with the following credentials:") //TODO: read about cucumber Enum
+public class LoginSteps {
+
+    LoginPage loginPage = new LoginPage();
+
+    @Given("user is on Login page")
+    public void userIsOnLoginPage() {
+        LogManager.getLogger().info("Login page is displayed");
+    }
+
+    @When("user logs in with the following credentials:")
     public void login(Map<String, String> userData) {
         loginPage.loginWithCredentials(userData);
     }
 
-    @Then("{string} error message is displayed")
-    public void errorMessageIsDisplayed(String expectedMessage) {
-        WaitUtils.waitForElementToBeDisplayed(loginPage.getErrorLabel(), PropertiesManager.checkElementIsDisplayedTimeout());
+    @Then("{string} message is displayed")
+    public void validateErrorMessage(String expectedMessage) {
         String actualMessage = loginPage.getErrorLabel().getText();
-        Assert.assertEquals(expectedMessage, actualMessage);
+        assertThat("The error message is incorrect", actualMessage, is(expectedMessage));
+    }
+
+    @Then("{string} is displayed")
+    public void isLoginPageDisplayed(String title) {
+        loginPage.assertPageTitle(title);
     }
 }

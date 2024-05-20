@@ -1,7 +1,6 @@
 package contact.list.project.configurations.properties;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,39 +8,69 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class PropertiesManager {
-    private static final Logger LOG = LogManager.getLogger(PropertiesManager.class); //рефлексия, мол логер ссылает на этот класс внутри класса
+
     private static final Properties PROPERTIES = new Properties();
 
     static {
-        try (InputStream input = PropertiesManager.class.getClassLoader().getResourceAsStream("properties/config.properties")) {//try with resources, to not wrote finally, to close here
+        try (InputStream input = PropertiesManager.class.getClassLoader().getResourceAsStream("properties/config.properties")) {
             if (input != null) {
                 PROPERTIES.load(input);
             } else {
-                LOG.error("Unable to find properties file");
+                LogManager.getLogger().error("Unable to find properties file");
             }
         } catch (IOException e) {
-            LOG.error("Error loading properties file", e);
+            LogManager.getLogger().error("Error loading properties file", e);
         }
     }
 
     private PropertiesManager() {
-    } //чтобы невозможно было создать объект класса
-
-    public static String getBaseUrl() {
-        return PROPERTIES.getProperty("baseUrl");
-    }
-
-    public static String getPage(String pageName) {
-        String pageUrl = getBaseUrl() + PROPERTIES.getProperty(pageName);
-        LOG.info("The page URL is retrieved from the properties: " + pageUrl);
-        return pageUrl;
     }
 
     public static String getBrowser() {
-        return PROPERTIES.getProperty("browser");
+        return PROPERTIES.getProperty("BROWSER");
+    }
+
+    public static String getProperty(String propertyName, String logMessage) {
+        String propertyValue = PROPERTIES.getProperty(propertyName);
+        if (propertyValue != null) {
+            LogManager.getLogger().info("Extract {}: {}", logMessage, propertyValue);
+            return propertyValue;
+        } else {
+            LogManager.getLogger().warn("{}  is null or not found in the properties file", logMessage);
+            throw new NullPointerException(logMessage + " is null or not found in the properties file");
+        }
+    }
+
+    public static String getBaseUrl() {
+        return getProperty("BASE_URL", "Base URL");
+    }
+
+    public static String getEmailRegex() {
+        return getProperty("EMAIL_PATTERN.regexp", "Email regex");
+    }
+
+    public static String getUserNameRegex() {
+        return getProperty("NAME_PATTERN.regexp", "Name regex");
+    }
+
+    public static String getMediaType() {
+        return getProperty("MEDIA_TYPE", "Media type");
+    }
+
+    public static String getTimePattern() {
+        return getProperty("TIME_PATTERN", "Time Pattern");
+    }
+    public static String getTimePatternForMap() {
+        return getProperty("TIME_PATTERN_FOR_MAP", "Time pattern for Map");
     }
 
     public static Duration checkElementIsDisplayedTimeout() {
-        return Duration.ofSeconds(Integer.parseInt(PROPERTIES.getProperty("elementIsDisplayed")));
+        String propertyValue = PROPERTIES.getProperty("DISPLAYED_ELEMENT_TIMEOUT");
+        try {
+            return Duration.ofSeconds(Integer.parseInt(propertyValue));
+        } catch (NumberFormatException | NullPointerException e) {
+            LogManager.getLogger().warn("Invalid or missing displayedElementTimeout value in properties. Using default value - 5 seconds.");
+            return Duration.ofSeconds(5);
+        }
     }
 }

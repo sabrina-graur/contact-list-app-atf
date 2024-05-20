@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ScenarioContext {
     private static ScenarioContext instance;
-    private Map<ScenarioKey, Object> data;
+    private Map<ScenarioObjectKey, Object> data;
 
     private ScenarioContext() {
         data = new HashMap<>();
@@ -18,11 +18,11 @@ public class ScenarioContext {
         return instance;
     }
 
-    public void saveData(ScenarioKey key, Object value) {
+    public void saveData(ScenarioObjectKey key, Object value) {
         data.put(key, value);
     }
 
-    public <T> T getData(ScenarioKey key) { //TODO: Class <T> type , type.cast. DO WE NEED ANOTHER METHOD?
+    public <T> T getData(ScenarioObjectKey key) {
         return (T) data.get(key);
     }
 

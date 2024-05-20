@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <Configuration status="WARN">
+<Configuration>
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss} %-5level %c{1} - %message%n</Property>
+    </Properties>
     <Appenders>
-      <Console name="ConsoleAppender" target="SYSTEM_OUT">
-        <PatternLayout pattern="%style{%d{yyyy-MM-dd HH:mm:ss}}{yellow} %highlight{%-5level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green} %logger{36} - %message%n"/>
-      </Console>
-      <File name="FileAppender" fileName="target/evidence/logs/app.log">
-        <PatternLayout pattern="%style{%d{yyyy-MM-dd HH:mm:ss}}{yellow} %highlight{%-5level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green} %logger{36} - %message%n"/>
-      </File>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+        <RollingFile name="AllLogsFileAppender"
+                     fileName="reports/evidence/${date:yyyy-MM-dd_HH-mm}/all_logs.log"
+                     filePattern="reports/evidence/${date:yyyy-MM-dd_HH-mm}/all_logs-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <SizeBasedTriggeringPolicy size="1 MB"/>
+        </RollingFile>
+        <RollingFile name="FileAppender"
+                     fileName="reports/evidence/${date:yyyy-MM-dd_HH-mm}/${ctx:scenarioName}/${ctx:scenarioName}.log"
+                     filePattern="reports/evidence/${date:yyyy-MM-dd_HH-mm}/${ctx:scenarioName}/${ctx:scenarioName}-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <SizeBasedTriggeringPolicy size="1 MB"/>
+        </RollingFile>
     </Appenders>
     <Loggers>
-      <Root level="info">
-        <AppenderRef ref="ConsoleAppender"/>
-        <AppenderRef ref="FileAppender"/>
-      </Root>
+        <Root level="INFO">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="AllLogsFileAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Root>
     </Loggers>
-  </Configuration>
+</Configuration>

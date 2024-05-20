@@ -1,7 +1,7 @@
 package contact.list.project.utils;
 
-import contact.list.project.configurations.scenario_context.ScenarioContext;
-import contact.list.project.configurations.scenario_context.ScenarioKey;
+import contact.list.project.configurations.driverfactory.DriverManager;
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,21 +10,19 @@ import java.time.Duration;
 
 public class WaitUtils {
 
-    public static void waitForElementToBeDisplayed(WebElement elementLocator, Duration timeoutInSeconds) {
-        try {
-            WebDriverWait wait = new WebDriverWait(ScenarioContext.getInstance().getData(ScenarioKey.WEB_DRIVER), timeoutInSeconds);
-            wait.until(ExpectedConditions.visibilityOf(elementLocator));
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to wait for element to be displayed.", e);
-        }
+    private static WebDriverWait createWebDriverWait(Duration timeoutInSeconds) {
+        return new WebDriverWait(DriverManager.getDriver(), timeoutInSeconds);
+    }
+
+    public static void waitForElementToBeDisplayed(WebElement element, Duration timeoutInSeconds) {
+        WebDriverWait wait = createWebDriverWait(timeoutInSeconds);
+        wait.until(ExpectedConditions.visibilityOf(element));
+        LogManager.getLogger().info("{} field is displayed.", element.getAccessibleName());
     }
 
     public static void waitForElementToBeClickable(WebElement element, Duration timeoutInSeconds) {
-        try {
-            WebDriverWait wait = new WebDriverWait(ScenarioContext.getInstance().getData(ScenarioKey.WEB_DRIVER), timeoutInSeconds);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-        } catch (Exception e) {
-            throw new IllegalArgumentException("An error occurred: " + e.getMessage(), e);
-        }
+        WebDriverWait wait = createWebDriverWait(timeoutInSeconds);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        LogManager.getLogger().info("Button [{}] is clickable.", element.getText());
     }
 }

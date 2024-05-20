@@ -1,11 +1,19 @@
 package contact.list.project.ui.pages;
 
-import org.openqa.selenium.WebDriver;
+import contact.list.project.configurations.properties.PropertiesManager;
+import contact.list.project.utils.WaitUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.Map;
 
 public class LoginPage extends CommonPage {
+
+    @FindBy(xpath = "//input[@id='email']")
+    private WebElement emailInput;
+
+    @FindBy(xpath = "//input[@id='password']")
+    private WebElement passwordInput;
 
     @FindBy(id = "signup")
     private WebElement signUpButton;
@@ -13,11 +21,8 @@ public class LoginPage extends CommonPage {
     @FindBy(id = "error")
     private WebElement errorLabel;
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
-    }
-
     public WebElement getErrorLabel() {
+        WaitUtils.waitForElementToBeDisplayed(errorLabel, PropertiesManager.checkElementIsDisplayedTimeout());
         return errorLabel;
     }
 
@@ -26,8 +31,8 @@ public class LoginPage extends CommonPage {
     }
 
     public void loginWithCredentials(Map<String, String> user) {
-            actions.populateField(getEmailInput(), user.get("email"));
-            actions.populateField(getPasswordInput(), user.get("password"));
-            clickSubmit();
+        actions.populateField(emailInput, user.get("email"));
+        actions.populateField(passwordInput, user.get("password"));
+        clickSubmit();
     }
 }

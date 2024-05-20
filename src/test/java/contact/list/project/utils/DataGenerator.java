@@ -1,49 +1,45 @@
 package contact.list.project.utils;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import contact.list.project.configurations.properties.PropertiesManager;
+import net.datafaker.Faker;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import java.util.regex.Pattern;
 
 public class DataGenerator {
+    private static final Faker FAKER = new Faker();
+    private static final Pattern NAME_PATTERN = Pattern.compile(PropertiesManager.getUserNameRegex());
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(PropertiesManager.getEmailRegex());
 
-    private static final Logger LOG = LogManager.getLogger(DataGenerator.class);
-    private static final String EMAIL_DOMAIN = "@gmail.com";
-    static String LengthValidationMessage = "Length must be a positive integer.";
-
-    public static String generateRandomEmail(int length) {
-        if (length <= 0) {
-            throw new IllegalArgumentException(LengthValidationMessage);
-        }
-        String allowedChars = "abcdefghijklmnopqrstuvwxyz1234567890-_.";
-        String temp = RandomStringUtils.random(length, allowedChars);
-        String email = temp.substring(0, temp.length() - EMAIL_DOMAIN.length()) + EMAIL_DOMAIN;
-        LOG.info("The random email with {} length was generated", length);
+    public static String generateRandomEmail() {
+        String email;
+        do {
+            email = FAKER.internet().emailAddress();
+        } while (!EMAIL_PATTERN.matcher(email).matches());
+        LogManager.getLogger().info("The random email was generated: {}", email);
         return email;
     }
 
-    public static String generateRandomAlphabeticValue(int length) {
-        if (length <= 0) {
-            throw new IllegalArgumentException(LengthValidationMessage);
-        }
-        String randomAlphabetic = RandomStringUtils.randomAlphabetic(length);
-        String capitalizedWord = randomAlphabetic.substring(0, 1).toUpperCase() + randomAlphabetic.substring(1).toLowerCase();
-        LOG.info("The random alphabetic String with {} length was generated", length);
-        return capitalizedWord;
+    public static String generateRandomName(String nameType) {
+        String name;
+        do {
+            name = (nameType.equals("first name")) ? FAKER.name().firstName() : FAKER.name().lastName();
+        } while (!NAME_PATTERN.matcher(name).matches());
+        LogManager.getLogger().info("The random {} was generated: {}", nameType, name);
+        return name;
     }
 
-    public static String generateRandomAlphanumericValue(int length) {
-        if (length <= 0) {
-            throw new IllegalArgumentException(LengthValidationMessage);
-        }
-        LOG.info("The random alphanumeric String with {} length was generated", length);
-        return RandomStringUtils.randomAlphanumeric(length);
+    public static String generateRandomFirstName() {
+        return generateRandomName("first name");
     }
 
-    public static String generateNumericValue(int length) {
-        if (length <= 0) {
-            throw new IllegalArgumentException(LengthValidationMessage);
-        }
-        LOG.info("Generating a random numeric string with length {}", length);
-        return RandomStringUtils.randomNumeric(length);
+    public static String generateRandomLastName() {
+        return generateRandomName("last name");
+    }
+
+    public static String generateRandomPassword() {
+        String password = FAKER.internet().password();
+        LogManager.getLogger().info("The random password was generated: {} ", password);
+        return password;
     }
 }
