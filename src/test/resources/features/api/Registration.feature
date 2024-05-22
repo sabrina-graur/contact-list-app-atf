@@ -2,7 +2,7 @@
 Feature: User Registration via API
 
   @DeleteAccount
-  Scenario: User successfully creates an account
+  Scenario: Validate registration with valid data
     Given the following USER_CREDENTIALS:
       | firstName | Selina                    |
       | lastName  | Kyle                      |

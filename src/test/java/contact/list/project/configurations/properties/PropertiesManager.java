@@ -36,7 +36,7 @@ public class PropertiesManager {
             LogManager.getLogger().info("Extract {}: {}", logMessage, propertyValue);
             return propertyValue;
         } else {
-            LogManager.getLogger().warn("{}  is null or not found in the properties file", logMessage);
+            LogManager.getLogger().warn("{} is null or not found in the properties file", logMessage);
             throw new NullPointerException(logMessage + " is null or not found in the properties file");
         }
     }
@@ -53,6 +53,10 @@ public class PropertiesManager {
         return getProperty("NAME_PATTERN.regexp", "Name regex");
     }
 
+    public static String getPasswordRegex() {
+        return getProperty("PASSWORD_PATTERN.regexp", "Password regex");
+    }
+
     public static String getMediaType() {
         return getProperty("MEDIA_TYPE", "Media type");
     }
@@ -60,8 +64,9 @@ public class PropertiesManager {
     public static String getTimePattern() {
         return getProperty("TIME_PATTERN", "Time Pattern");
     }
+
     public static String getTimePatternForMap() {
-        return getProperty("TIME_PATTERN_FOR_MAP", "Time pattern for Map");
+        return getProperty("TIME_PATTERN_FOR_FOLDER", "Time pattern for a map generation");
     }
 
     public static Duration checkElementIsDisplayedTimeout() {

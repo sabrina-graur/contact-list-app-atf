@@ -27,6 +27,6 @@ public class SignUpSteps {
 
     @Then("{string} page is displayed")
     public void isPageDisplayed(String title) {
-        signUpPage.assertPageTitle(title);
+        signUpPage.validatePageTitle(title);
     }
 }

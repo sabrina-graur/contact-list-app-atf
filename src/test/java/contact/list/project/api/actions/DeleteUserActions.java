@@ -1,8 +1,8 @@
 package contact.list.project.api.actions;
 
 import contact.list.project.configurations.properties.PropertiesManager;
-import contact.list.project.configurations.scenario_context.ScenarioContext;
-import contact.list.project.configurations.scenario_context.ScenarioObjectKey;
+import contact.list.project.configurations.scenario.context.ScenarioContext;
+import contact.list.project.configurations.scenario.context.ScenarioObjectKey;
 import org.apache.logging.log4j.LogManager;
 
 import static contact.list.project.api.enums.Endpoint.USER_INFO;

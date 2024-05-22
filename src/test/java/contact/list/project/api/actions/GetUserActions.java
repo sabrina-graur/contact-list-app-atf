@@ -3,13 +3,13 @@ package contact.list.project.api.actions;
 import contact.list.project.api.dtos.response.CreateUserResponse;
 import contact.list.project.api.dtos.response.UserProfileResponse;
 import contact.list.project.configurations.properties.PropertiesManager;
-import contact.list.project.configurations.scenario_context.ScenarioContext;
+import contact.list.project.configurations.scenario.context.ScenarioContext;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 
 import static contact.list.project.api.enums.Endpoint.USER_INFO;
-import static contact.list.project.configurations.scenario_context.ScenarioObjectKey.RESPONSE;
-import static contact.list.project.configurations.scenario_context.ScenarioObjectKey.TOKEN;
+import static contact.list.project.configurations.scenario.context.ScenarioObjectKey.RESPONSE;
+import static contact.list.project.configurations.scenario.context.ScenarioObjectKey.TOKEN;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

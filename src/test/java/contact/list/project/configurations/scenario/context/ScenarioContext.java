@@ -1,4 +1,4 @@
-package contact.list.project.configurations.scenario_context;
+package contact.list.project.configurations.scenario.context;
 
 import java.util.HashMap;
 import java.util.Map;

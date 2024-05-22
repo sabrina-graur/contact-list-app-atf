@@ -10,6 +10,7 @@ public class DataGenerator {
     private static final Faker FAKER = new Faker();
     private static final Pattern NAME_PATTERN = Pattern.compile(PropertiesManager.getUserNameRegex());
     private static final Pattern EMAIL_PATTERN = Pattern.compile(PropertiesManager.getEmailRegex());
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PropertiesManager.getPasswordRegex());
 
     public static String generateRandomEmail() {
         String email;
@@ -20,7 +21,7 @@ public class DataGenerator {
         return email;
     }
 
-    public static String generateRandomName(String nameType) {
+    private static String generateRandomName(String nameType) {
         String name;
         do {
             name = (nameType.equals("first name")) ? FAKER.name().firstName() : FAKER.name().lastName();
@@ -38,7 +39,10 @@ public class DataGenerator {
     }
 
     public static String generateRandomPassword() {
-        String password = FAKER.internet().password();
+        String password;
+        do {
+            password = FAKER.internet().password();
+        } while (!PASSWORD_PATTERN.matcher(password).matches());
         LogManager.getLogger().info("The random password was generated: {} ", password);
         return password;
     }
