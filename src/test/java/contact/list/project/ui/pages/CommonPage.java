@@ -15,8 +15,7 @@ import static org.junit.Assert.assertEquals;
 
 public abstract class CommonPage {
 
-    BrowserActions actions = new BrowserActions();
-    private static final String TITLE_LOCATOR = "//h1[text()='%s']";
+    BrowserActions action = new BrowserActions();
 
     @FindBy(id = "submit")
     private WebElement submitButton;
@@ -29,26 +28,23 @@ public abstract class CommonPage {
     }
 
     public void clickSubmit() {
-        actions.clickButton(submitButton);
+        action.clickButton(submitButton);
     }
 
     public WebElement getPageTitle(String title) {
         try {
-            return DriverManager.getDriver().findElement(By.xpath(String.format(TITLE_LOCATOR, title)));
+            String titleLocator = "//h1[text()='%s']";
+            return DriverManager.getDriver().findElement(By.xpath(String.format(titleLocator, title)));
         } catch (NoSuchElementException e) {
             LogManager.getLogger().warn("No title with the following text: {}", title);
         }
         return commonTitle;
     }
 
-    public void assertPageTitle(String expectedTitle) {
-        WebElement pageTitleElement = getPageTitle(expectedTitle);
-        String actualTitle = pageTitleElement.getText();
+    public void validatePageTitle(String expectedTitle) {
         Awaitility.await()
                 .atMost(PropertiesManager.checkElementIsDisplayedTimeout())
-                .untilAsserted(() -> {
-                    assertEquals("Page title does not match", expectedTitle, actualTitle);
-                });
+                .untilAsserted(() -> assertEquals("Page title does not match", expectedTitle, getPageTitle(expectedTitle).getText()));
         LogManager.getLogger().info("The title with the following text: \"{}\" is displayed", expectedTitle);
     }
 }

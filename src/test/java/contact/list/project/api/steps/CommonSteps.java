@@ -1,8 +1,8 @@
 package contact.list.project.api.steps;
 
 import contact.list.project.api.enums.ErrorMessage;
-import contact.list.project.configurations.scenario_context.ScenarioContext;
-import contact.list.project.configurations.scenario_context.ScenarioObjectKey;
+import contact.list.project.configurations.scenario.context.ScenarioContext;
+import contact.list.project.configurations.scenario.context.ScenarioObjectKey;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.restassured.response.Response;

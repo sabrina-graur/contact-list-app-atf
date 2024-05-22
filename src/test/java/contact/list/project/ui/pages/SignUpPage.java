@@ -22,14 +22,14 @@ public class SignUpPage extends CommonPage {
     private WebElement passwordInput;
 
     public void addUser() {
-        actions.populateField(firstNameInput, DataGenerator.generateRandomFirstName());
-        actions.populateField(lastNameInput, DataGenerator.generateRandomLastName());
-        actions.populateField(emailInput, DataGenerator.generateRandomEmail());
-        actions.populateField(passwordInput, DataGenerator.generateRandomPassword());
+        action.populateField(firstNameInput, DataGenerator.generateRandomFirstName());
+        action.populateField(lastNameInput, DataGenerator.generateRandomLastName());
+        action.populateField(emailInput, DataGenerator.generateRandomEmail());
+        action.populateField(passwordInput, DataGenerator.generateRandomPassword());
         clickSubmit();
     }
 
     public void clickCancel() {
-        actions.clickButton(cancelButton);
+        action.clickButton(cancelButton);
     }
 }

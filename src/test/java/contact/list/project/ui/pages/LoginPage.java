@@ -27,12 +27,12 @@ public class LoginPage extends CommonPage {
     }
 
     public void clickSignUpButton() {
-        actions.clickButton(signUpButton);
+        action.clickButton(signUpButton);
     }
 
     public void loginWithCredentials(Map<String, String> user) {
-        actions.populateField(emailInput, user.get("email"));
-        actions.populateField(passwordInput, user.get("password"));
+        action.populateField(emailInput, user.get("email"));
+        action.populateField(passwordInput, user.get("password"));
         clickSubmit();
     }
 }

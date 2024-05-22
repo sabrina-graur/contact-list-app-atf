@@ -33,6 +33,6 @@ public class LoginSteps {
 
     @Then("{string} is displayed")
     public void isLoginPageDisplayed(String title) {
-        loginPage.assertPageTitle(title);
+        loginPage.validatePageTitle(title);
     }
 }

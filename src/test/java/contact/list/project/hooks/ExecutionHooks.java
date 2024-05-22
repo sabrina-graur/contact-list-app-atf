@@ -3,8 +3,7 @@ package contact.list.project.hooks;
 import contact.list.project.api.actions.DeleteUserActions;
 import contact.list.project.configurations.driverfactory.DriverManager;
 import contact.list.project.configurations.logger.LoggerHelper;
-import contact.list.project.configurations.scenario_context.ScenarioContext;
-import contact.list.project.configurations.screenshots.ScreenshotCaptureException;
+import contact.list.project.configurations.scenario.context.ScenarioContext;
 import contact.list.project.configurations.screenshots.ScreenshotConfiguration;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterAll;
@@ -21,7 +20,6 @@ public class ExecutionHooks {
     @BeforeAll
     public static void launchTests() {
         ScenarioContext.getInstance().clearData();
-        ScreenshotConfiguration.deleteOldScreenshots();
     }
 
     @Before("@API")
@@ -53,12 +51,12 @@ public class ExecutionHooks {
     }
 
     @After("@UI")
-    public void clearCash() {
-        DriverManager.clearBrowserCash();
+    public void clearCache() {
+        DriverManager.clearBrowserCache();
     }
 
     @AfterStep("@UI")
-    public void takeScreenshot(Scenario scenario) throws ScreenshotCaptureException {
+    public void takeScreenshot(Scenario scenario) {
         ScreenshotConfiguration.captureScreenshot(scenario);
     }
 
