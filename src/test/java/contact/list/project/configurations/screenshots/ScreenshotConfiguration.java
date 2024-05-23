@@ -10,7 +10,6 @@ import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -49,31 +48,5 @@ public class ScreenshotConfiguration {
         }
         String screenshotName = "Screenshot_" + timestamp + ".png";
         return new File(scenarioDirectory, screenshotName);
-    }
-
-    public static void deleteOldScreenshots() {
-        File screenshotsDirectory = new File("target/evidence/");
-        File[] scenarioDirectories = screenshotsDirectory.listFiles(File::isDirectory); //(File file) -> file.isDirectory()
-        if (scenarioDirectories != null) {
-            for (File scenarioDirectory : scenarioDirectories) {
-                File[] files = scenarioDirectory.listFiles();
-                if (files != null) {
-                    long now = System.currentTimeMillis();
-                    for (File file : files) {
-                        if (file.isFile()) {
-                            long creationTime = file.lastModified();
-                            long durationInDays = Duration.ofMillis(now - creationTime).toDays();
-                            if (durationInDays >= 3) {
-                                if (file.delete()) {
-                                    LogManager.getLogger().info("Deleted old screenshot: {}", file.getName());
-                                } else {
-                                    LogManager.getLogger().warn("Failed to delete old screenshot: {}", file.getName());
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 }

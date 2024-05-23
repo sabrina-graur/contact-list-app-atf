@@ -17,4 +17,3 @@ public enum Endpoint {
         return ENDPOINT;
     }
 }
-
