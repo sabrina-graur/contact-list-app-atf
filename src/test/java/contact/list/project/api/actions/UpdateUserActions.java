@@ -16,7 +16,7 @@ public class UpdateUserActions {
                 .header("Authorization", ScenarioContext.getInstance().getData(TOKEN))
                 .contentType("application/json")
                 .body(userData)
-                .patch(PropertiesManager.getBaseUrl() + USER_INFO.getEndPoint())
+                .patch(PropertiesManager.getProperty("BASE_URL") + USER_INFO.getEndPoint())
                 .thenReturn();
         ScenarioContext.getInstance().saveData(RESPONSE, response);
     }

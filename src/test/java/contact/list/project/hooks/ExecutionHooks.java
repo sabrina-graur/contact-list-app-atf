@@ -15,8 +15,6 @@ import org.apache.logging.log4j.LogManager;
 
 public class ExecutionHooks {
 
-    private boolean clearUserDataExecuted = false;
-
     @BeforeAll
     public static void launchTests() {
         ScenarioContext.getInstance().clearData();
@@ -36,18 +34,15 @@ public class ExecutionHooks {
         DriverManager.openBasePage();
     }
 
-    @After("@DeleteAccount")
+    @After(value = "@DeleteAccount", order = 2)
     public void clearUserData() {
         DeleteUserActions deleteUserActions = new DeleteUserActions();
         deleteUserActions.deleteAccount();
-        clearUserDataExecuted = true;
     }
 
-    @After("@API")
+    @After(value = "@API", order = 1)
     public void clearDataAPI() {
-        if (clearUserDataExecuted) {
-            ScenarioContext.getInstance().clearData();
-        }
+        ScenarioContext.getInstance().clearData();
     }
 
     @After("@UI")

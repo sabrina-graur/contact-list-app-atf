@@ -16,7 +16,7 @@ public class DeleteUserActions {
         given()
                 .header("Authorization", token)
                 .contentType("application/json")
-                .delete(PropertiesManager.getBaseUrl() + USER_INFO.getEndPoint())
+                .delete(PropertiesManager.getProperty("BASE_URL") + USER_INFO.getEndPoint())
                 .then().statusCode(SC_OK);
         LogManager.getLogger().info("User with token: {} was deleted", token);
     }

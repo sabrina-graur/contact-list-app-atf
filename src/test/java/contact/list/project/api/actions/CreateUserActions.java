@@ -17,7 +17,7 @@ public class CreateUserActions {
                 .header("Authorization", "Bearer {{token}}")
                 .contentType("application/json")
                 .body(userData)
-                .post(PropertiesManager.getBaseUrl() + SIGN_UP.getEndPoint())
+                .post(PropertiesManager.getProperty("BASE_URL") + SIGN_UP.getEndPoint())
                 .thenReturn();
         ScenarioContext.getInstance().saveData(RESPONSE, response);
         ScenarioContext.getInstance().saveData(TOKEN, response.jsonPath().getString("token"));
