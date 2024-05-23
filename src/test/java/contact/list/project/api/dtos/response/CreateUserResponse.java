@@ -27,9 +27,9 @@ public class CreateUserResponse {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
         if (!(object instanceof CreateUserResponse that)) return false;
-        return Objects.equals(getUser(), that.getUser()) && Objects.equals(getToken(), that.getToken());
+        return Objects.equals(getUser(), that.getUser())
+                && Objects.equals(getToken(), that.getToken());
     }
 
     @Override

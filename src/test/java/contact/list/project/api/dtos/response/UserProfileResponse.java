@@ -49,13 +49,12 @@ public class UserProfileResponse {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
         if (!(object instanceof UserProfileResponse that)) return false;
-        return getV() == that.getV() && Objects.equals(getId(),
-                that.getId()) && Objects.equals(getFirstName(),
-                that.getFirstName()) && Objects.equals(getLastName(),
-                that.getLastName()) && Objects.equals(getEmail(),
-                that.getEmail());
+        return getV() == that.getV()
+                && Objects.equals(getId(), that.getId())
+                && Objects.equals(getFirstName(), that.getFirstName())
+                && Objects.equals(getLastName(), that.getLastName())
+                && Objects.equals(getEmail(), that.getEmail());
     }
 
     @Override
