@@ -21,11 +21,11 @@ public class ScreenshotConfiguration {
 
     public static void captureScreenshot(Scenario scenario) {
         TakesScreenshot screenshotTaker = (TakesScreenshot) DriverManager.getDriver();
-        String formattedTimestamp = getCurrentDateTime(PropertiesManager.getTimePattern());
+        String formattedTimestamp = getCurrentDateTime(PropertiesManager.getProperty("TIME_PATTERN"));
 
         byte[] screenshotBytes = screenshotTaker.getScreenshotAs(OutputType.BYTES);
         String fileName = "Screenshot_" + formattedTimestamp;
-        scenario.attach(screenshotBytes, PropertiesManager.getMediaType(), fileName);
+        scenario.attach(screenshotBytes, PropertiesManager.getProperty("MEDIA_TYPE"), fileName);
         LogManager.getLogger().info("Screenshot attached to report: {}", fileName);
 
         File screenshot = screenshotTaker.getScreenshotAs(OutputType.FILE);
@@ -39,7 +39,7 @@ public class ScreenshotConfiguration {
     }
 
     private static File createScreenshotFile(Scenario scenario, String timestamp) {
-        String directoryPath = "reports/evidence/" + getCurrentDateTime(PropertiesManager.getTimePatternForMap());
+        String directoryPath = "reports/evidence/" + getCurrentDateTime(PropertiesManager.getProperty("TIME_PATTERN_FOR_FOLDER"));
         File scenarioDirectory = new File(directoryPath, scenario.getName().trim().replaceAll(" ", "_"));
         if (!scenarioDirectory.exists()) {
             if (scenarioDirectory.mkdirs()) {

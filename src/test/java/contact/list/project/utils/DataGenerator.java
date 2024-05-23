@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 public class DataGenerator {
     private static final Faker FAKER = new Faker();
-    private static final Pattern NAME_PATTERN = Pattern.compile(PropertiesManager.getUserNameRegex());
-    private static final Pattern EMAIL_PATTERN = Pattern.compile(PropertiesManager.getEmailRegex());
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PropertiesManager.getPasswordRegex());
+    private static final Pattern NAME_PATTERN = Pattern.compile(PropertiesManager.getProperty("NAME_PATTERN.regexp"));
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(PropertiesManager.getProperty("EMAIL_PATTERN.regexp"));
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PropertiesManager.getProperty("PASSWORD_PATTERN.regexp"));
 
     public static String generateRandomEmail() {
         String email;

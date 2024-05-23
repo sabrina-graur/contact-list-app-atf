@@ -20,7 +20,7 @@ public class GetUserActions {
         return given()
                 .header("Authorization", ScenarioContext.getInstance().getData(TOKEN))
                 .contentType("application/json")
-                .get(PropertiesManager.getBaseUrl() + USER_INFO.getEndPoint())
+                .get(PropertiesManager.getProperty("BASE_URL") + USER_INFO.getEndPoint())
                 .then()
                 .extract()
                 .as(UserProfileResponse.class);

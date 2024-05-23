@@ -30,43 +30,15 @@ public class PropertiesManager {
         return PROPERTIES.getProperty("BROWSER");
     }
 
-    public static String getProperty(String propertyName, String logMessage) {
+    public static String getProperty(String propertyName) {
         String propertyValue = PROPERTIES.getProperty(propertyName);
         if (propertyValue != null) {
-            LogManager.getLogger().info("Extract {}: {}", logMessage, propertyValue);
+            LogManager.getLogger().info("Extracting the following value from the properties : {}", propertyValue);
             return propertyValue;
         } else {
-            LogManager.getLogger().warn("{} is null or not found in the properties file", logMessage);
-            throw new NullPointerException(logMessage + " is null or not found in the properties file");
+            LogManager.getLogger().warn("{} is null or not found in the properties file", propertyName);
+            throw new NullPointerException(propertyName + " is null or not found in the properties file");
         }
-    }
-
-    public static String getBaseUrl() {
-        return getProperty("BASE_URL", "Base URL");
-    }
-
-    public static String getEmailRegex() {
-        return getProperty("EMAIL_PATTERN.regexp", "Email regex");
-    }
-
-    public static String getUserNameRegex() {
-        return getProperty("NAME_PATTERN.regexp", "Name regex");
-    }
-
-    public static String getPasswordRegex() {
-        return getProperty("PASSWORD_PATTERN.regexp", "Password regex");
-    }
-
-    public static String getMediaType() {
-        return getProperty("MEDIA_TYPE", "Media type");
-    }
-
-    public static String getTimePattern() {
-        return getProperty("TIME_PATTERN", "Time Pattern");
-    }
-
-    public static String getTimePatternForMap() {
-        return getProperty("TIME_PATTERN_FOR_FOLDER", "Time pattern for a map generation");
     }
 
     public static Duration checkElementIsDisplayedTimeout() {

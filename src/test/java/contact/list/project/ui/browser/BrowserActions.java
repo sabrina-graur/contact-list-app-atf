@@ -1,17 +1,11 @@
 package contact.list.project.ui.browser;
 
-import contact.list.project.configurations.driverfactory.DriverManager;
 import contact.list.project.configurations.properties.PropertiesManager;
 import contact.list.project.utils.WaitUtils;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 public class BrowserActions {
-
-    public BrowserActions() {
-        PageFactory.initElements(DriverManager.getDriver(), this);
-    }
 
     public void clickButton(WebElement button) {
         WaitUtils.waitForElementToBeClickable(button, PropertiesManager.checkElementIsDisplayedTimeout());

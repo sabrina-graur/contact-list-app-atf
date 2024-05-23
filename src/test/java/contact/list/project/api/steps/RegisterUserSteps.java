@@ -16,7 +16,7 @@ public class RegisterUserSteps {
 
     CreateUserActions createUserActions = new CreateUserActions();
     GetUserActions getUserActions = new GetUserActions();
-
+//TODO: think about enum ScenarioObjectKey from the Feature file
     @Given("user has a registered account with the following {}:")
     public void registerUserForFurtherUpdate(ScenarioObjectKey userDataKey, Map<String, String> userData) {
         prepareCredentials(userDataKey, userData);

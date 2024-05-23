@@ -24,7 +24,7 @@ public class DriverManager {
     }
 
     public static void openBasePage() {
-        getDriver().get(PropertiesManager.getBaseUrl());
+        getDriver().get(PropertiesManager.getProperty("BASE_URL"));
     }
 
     public static void clearBrowserCache() {
