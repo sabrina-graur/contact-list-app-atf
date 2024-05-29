@@ -1,4 +1,4 @@
-package contact.list.project.configurations.scenario.context;
+package contact.list.project.enums;
 
 public enum ScenarioObjectKey {
     USER_CREDENTIALS,

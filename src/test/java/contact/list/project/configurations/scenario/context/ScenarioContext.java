@@ -1,5 +1,7 @@
 package contact.list.project.configurations.scenario.context;
 
+import contact.list.project.enums.ScenarioObjectKey;
+
 import java.util.HashMap;
 import java.util.Map;
 

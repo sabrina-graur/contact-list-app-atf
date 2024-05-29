@@ -1,4 +1,4 @@
-package contact.list.project.ui.browser;
+package contact.list.project.ui.action;
 
 import contact.list.project.configurations.properties.PropertiesManager;
 import contact.list.project.utils.WaitUtils;

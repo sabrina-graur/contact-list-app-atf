@@ -3,7 +3,7 @@ Feature: Update User Account
 
   @DeleteAccount
   Scenario: Validate that user can update an account
-    Given user has a registered account with the following USER_CREDENTIALS:
+    Given user has a registered account with the following credentials:
       | firstName | Selina                    |
       | lastName  | Kyle                      |
       | email     | cat.selina.kyle@gmail.com |

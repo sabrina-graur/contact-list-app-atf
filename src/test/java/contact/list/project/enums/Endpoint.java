@@ -1,4 +1,4 @@
-package contact.list.project.api.enums;
+package contact.list.project.enums;
 
 import org.apache.logging.log4j.LogManager;
 

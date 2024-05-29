@@ -37,8 +37,7 @@ public class PropertiesManager {
             return propertyValue;
         } else {
             LogManager.getLogger().warn("{} is null or not found in the properties file", propertyName);
-            throw new NullPointerException(propertyName + " is null or not found in the properties file");
-        }
+        }  return null;
     }
 
     public static Duration checkElementIsDisplayedTimeout() {

@@ -2,7 +2,7 @@ package contact.list.project.ui.pages;
 
 import contact.list.project.configurations.driverfactory.DriverManager;
 import contact.list.project.configurations.properties.PropertiesManager;
-import contact.list.project.ui.browser.BrowserActions;
+import contact.list.project.ui.action.BrowserActions;
 import org.apache.logging.log4j.LogManager;
 import org.awaitility.Awaitility;
 import org.openqa.selenium.By;
