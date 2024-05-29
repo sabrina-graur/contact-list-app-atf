@@ -7,9 +7,9 @@ import contact.list.project.configurations.scenario.context.ScenarioContext;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 
-import static contact.list.project.api.enums.Endpoint.USER_INFO;
-import static contact.list.project.configurations.scenario.context.ScenarioObjectKey.RESPONSE;
-import static contact.list.project.configurations.scenario.context.ScenarioObjectKey.TOKEN;
+import static contact.list.project.enums.Endpoint.USER_INFO;
+import static contact.list.project.enums.ScenarioObjectKey.RESPONSE;
+import static contact.list.project.enums.ScenarioObjectKey.TOKEN;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

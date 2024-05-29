@@ -1,4 +1,4 @@
-package contact.list.project.api.enums;
+package contact.list.project.enums;
 
 public enum ErrorMessage {
     EMPTY_FIRST_NAME("User validation failed: firstName: Path `firstName` is required."),
@@ -8,7 +8,7 @@ public enum ErrorMessage {
     DUPLICATE_EMAIL("Email address is already in use"),
     WRONG_PASSWORD_LENGTH("User validation failed: password: Path `password` (`123`) is shorter than the minimum allowed length (7).");
 
-    String errorMessageName;
+    final String errorMessageName;
 
     ErrorMessage(String errorMessageName) {
         this.errorMessageName = errorMessageName;

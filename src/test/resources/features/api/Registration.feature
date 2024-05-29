@@ -3,23 +3,23 @@ Feature: User Registration via API
 
   @DeleteAccount
   Scenario: Validate registration with valid data
-    Given the following USER_CREDENTIALS:
+    Given the following credentials:
       | firstName | Selina                    |
       | lastName  | Kyle                      |
       | email     | cat.selina.kyle@gmail.com |
       | password  | meowMeow                  |
-    When user performs registration with USER_CREDENTIALS
+    When user registers an account
     Then response has status code 201
     And the new account is created
 
   @Negative
   Scenario Outline: Validate registration with invalid data
-    Given the following USER_CREDENTIALS:
+    Given the following credentials:
       | firstName | <firstName> |
       | lastName  | <lastName>  |
       | email     | <email>     |
       | password  | <password>  |
-    When user performs registration with USER_CREDENTIALS
+    When user registers an account
     Then response has status code 400
     And <errorMessage> error message is displayed
     Examples:

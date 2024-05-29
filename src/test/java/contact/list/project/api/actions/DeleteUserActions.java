@@ -2,10 +2,10 @@ package contact.list.project.api.actions;
 
 import contact.list.project.configurations.properties.PropertiesManager;
 import contact.list.project.configurations.scenario.context.ScenarioContext;
-import contact.list.project.configurations.scenario.context.ScenarioObjectKey;
+import contact.list.project.enums.ScenarioObjectKey;
 import org.apache.logging.log4j.LogManager;
 
-import static contact.list.project.api.enums.Endpoint.USER_INFO;
+import static contact.list.project.enums.Endpoint.USER_INFO;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 
