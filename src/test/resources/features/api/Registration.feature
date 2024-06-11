@@ -6,7 +6,7 @@ Feature: User Registration via API
     Given the following credentials:
       | firstName | Selina                    |
       | lastName  | Kyle                      |
-      | email     | cat.selina.kyle@gmail.com |
+      | email     | cat.selina.kyle!@gmail.com |
       | password  | meowMeow                  |
     When user registers an account
     Then response has status code 201

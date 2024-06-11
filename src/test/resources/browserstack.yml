@@ -1,0 +1,22 @@
+userName: sabrinagraur_atJDyP
+accessKey: ZcKTXUHB8oaUjvN7vixz
+framework: junit4
+platforms:
+#  - os: Windows
+#    osVersion: 10
+#    browserName: Chrome
+#    browserVersion: 120.0
+#  - deviceName: iPhone 15 Pro Max
+#    osVersion: 17
+#    browserName: safari
+#    deviceOrientation: portrait
+#  - deviceName: Samsung Galaxy S22
+#    osVersion: 12.0
+#    browserName: chrome
+#    deviceOrientation: portrait
+parallelsPerPlatform: 1
+browserstackLocal: true
+buildName: ${DATE_TIME}
+projectName: BrowserStack Sample
+networkLogs: true
+consoleLogs: info
