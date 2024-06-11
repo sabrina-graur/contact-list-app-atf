@@ -6,7 +6,7 @@ Feature: Update User Account
     Given user has a registered account with the following credentials:
       | firstName | Selina                    |
       | lastName  | Kyle                      |
-      | email     | cat.selina.kyle@gmail.com |
+      | email     | cat.selina.kyle!@gmail.com |
       | password  | meowMeow                  |
     When user updates the account with the following data:
       | firstName | Cat                  |
