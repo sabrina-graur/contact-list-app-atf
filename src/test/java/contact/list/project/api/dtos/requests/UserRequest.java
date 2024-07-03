@@ -1,7 +1,10 @@
 package contact.list.project.api.dtos.requests;
 
+import lombok.Getter;
+
 import java.util.Map;
 
+@Getter
 public class UserRequest {
 
     private String firstName;
@@ -17,22 +20,6 @@ public class UserRequest {
         this.lastName = user.get("lastName");
         this.email = user.get("email");
         this.password = user.get("password");
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override

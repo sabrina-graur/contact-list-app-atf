@@ -42,7 +42,7 @@ public class ExecutionHooks {
 
     @After(value = "@API", order = 1)
     public void clearDataAPI() {
-        ScenarioContext.getInstance().clearData();
+        launchTests();
     }
 
     @After("@UI")
@@ -58,7 +58,7 @@ public class ExecutionHooks {
     @AfterAll
     public static void closeTests() {
         DriverManager.tearDown();
-        ScenarioContext.getInstance().clearData();
+        launchTests();
         LogManager.getLogger().info("Test is finished. Browser closed");
     }
 }
